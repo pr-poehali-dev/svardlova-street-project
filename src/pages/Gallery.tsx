@@ -2,27 +2,65 @@ import { useState } from 'react';
 import Layout from '@/components/Layout';
 import Icon from '@/components/ui/icon';
 
-const IMG1 = 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/2a3dbe25-0860-45a2-b814-d445d3f64121.jpg';
-const IMG2 = 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/f47b0cbf-5863-423f-9bdd-0a77c134de9a.jpg';
-const IMG3 = 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/ff0608ca-997b-4ff7-a285-0bbffa5fb6a4.jpg';
-
 const photos = [
-  { id: 1, src: IMG1, title: 'Улица Свердлова', year: 'Современный вид', category: 'Архитектура', desc: 'Общий вид улицы с характерной исторической застройкой' },
-  { id: 2, src: IMG2, title: 'Купеческий особняк', year: 'XIX век', category: 'Архитектура', desc: 'Типичный образец дореволюционной застройки Астрахани' },
-  { id: 3, src: IMG3, title: 'Астрахань с высоты', year: 'Современный вид', category: 'Панорама', desc: 'Панорамный вид на исторический центр города' },
-  { id: 4, src: IMG1, title: 'Осенняя улица', year: 'Осень', category: 'Пейзаж', desc: 'Осенняя атмосфера исторических кварталов' },
-  { id: 5, src: IMG2, title: 'Детали фасада', year: 'XIX век', category: 'Архитектура', desc: 'Характерные декоративные элементы купеческой эпохи' },
-  { id: 6, src: IMG3, title: 'Волга и город', year: 'Панорама', category: 'Панорама', desc: 'Астрахань на берегах великой русской реки' },
+  {
+    id: 1,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/6618f16b-90f4-4e02-aa25-339da517c27a.jpg',
+    title: 'Дом Демидова',
+    year: 'XIX век',
+    category: 'Архитектура',
+    desc: 'Особняк купца Демидова — один из сохранившихся памятников купеческой застройки улицы',
+  },
+  {
+    id: 2,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/60833562-5f25-46fa-8d48-d5d26ed0df69.jpg',
+    title: 'Улица в начале XX века',
+    year: 'Начало XX в.',
+    category: 'Исторические',
+    desc: 'Вид улицы с трамвайными путями и конными экипажами эпохи Российской империи',
+  },
+  {
+    id: 3,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/dbc06da7-b3c6-4fd5-a47d-e66a94369ead.jpg',
+    title: 'Дом Хлебникова',
+    year: 'XIX век',
+    category: 'Архитектура',
+    desc: 'Дом, связанный с семьёй великого русского поэта Велимира Хлебникова — уроженца Астрахани',
+  },
+  {
+    id: 4,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/a074ee60-50d6-4b21-aba5-5de58ded69e3.jpg',
+    title: 'Центральный универмаг',
+    year: '1960-е',
+    category: 'Советский период',
+    desc: 'Здание ЦУМа — характерный пример советской торговой архитектуры середины XX века',
+  },
+  {
+    id: 5,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/b00ae325-db8c-4d31-9150-7143d53f033d.jpg',
+    title: 'Набережная Волги',
+    year: 'Современный вид',
+    category: 'Панорама',
+    desc: 'Панорамный вид на Астрахань с Волги — исторический силуэт города почти не изменился',
+  },
+  {
+    id: 6,
+    src: 'https://cdn.poehali.dev/projects/ca77e1f0-9369-4d5b-a066-1f0662d4b88d/files/7f58f36e-c6e8-4f16-b921-bb9346e4f6ad.jpg',
+    title: 'Астраханский кремль',
+    year: 'XVI–XVII вв.',
+    category: 'Панорама',
+    desc: 'Кремль — сердце Астрахани, основанный в XVI веке и хорошо видный с улицы Свердлова',
+  },
 ];
 
-const categories = ['Все', 'Архитектура', 'Панорама', 'Пейзаж'];
+const categories = ['Все', 'Архитектура', 'Исторические', 'Советский период', 'Панорама'];
 
 export default function Gallery() {
   const [active, setActive] = useState('Все');
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const filtered = active === 'Все' ? photos : photos.filter(p => p.category === active);
-  const current = lightbox !== null ? photos.find(p => p.id === lightbox) : null;
+  const current = lightbox !== null ? photos.find(p => p.id === lightbox) ?? null : null;
 
   const prev = () => {
     if (lightbox === null) return;
@@ -110,6 +148,12 @@ export default function Gallery() {
             </div>
           ))}
         </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-16">
+            <p className="font-display text-xl" style={{ color: 'var(--muted-foreground)' }}>Нет фотографий в этой категории</p>
+          </div>
+        )}
       </div>
 
       {/* Lightbox */}
@@ -126,19 +170,22 @@ export default function Gallery() {
             <div className="mt-4 text-center">
               <p className="font-display text-2xl font-light" style={{ color: 'var(--parchment)' }}>{current.title}</p>
               <p className="section-label mt-1" style={{ color: 'var(--gold)' }}>{current.year} · {current.category}</p>
+              <p className="font-body text-sm mt-2" style={{ color: 'rgba(245,239,224,0.6)' }}>{current.desc}</p>
             </div>
 
-            {/* Controls */}
+            {/* Prev */}
             <button
               onClick={prev}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-14 p-3 transition-opacity hover:opacity-70"
+              className="absolute left-0 top-[40%] -translate-x-14 p-3 transition-opacity hover:opacity-70"
               style={{ background: 'rgba(196,154,42,0.2)', border: '1px solid var(--gold)' }}
             >
               <Icon name="ChevronLeft" size={22} style={{ color: 'var(--gold-light)' }} />
             </button>
+
+            {/* Next */}
             <button
               onClick={next}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-14 p-3 transition-opacity hover:opacity-70"
+              className="absolute right-0 top-[40%] translate-x-14 p-3 transition-opacity hover:opacity-70"
               style={{ background: 'rgba(196,154,42,0.2)', border: '1px solid var(--gold)' }}
             >
               <Icon name="ChevronRight" size={22} style={{ color: 'var(--gold-light)' }} />
@@ -152,6 +199,13 @@ export default function Gallery() {
             >
               <Icon name="X" size={18} style={{ color: 'var(--parchment)' }} />
             </button>
+
+            {/* Counter */}
+            <div className="absolute top-3 left-3 px-3 py-1" style={{ background: 'rgba(28,20,9,0.7)', border: '1px solid rgba(196,154,42,0.3)' }}>
+              <span className="section-label" style={{ color: 'var(--gold-pale)' }}>
+                {filtered.findIndex(p => p.id === lightbox) + 1} / {filtered.length}
+              </span>
+            </div>
           </div>
         </div>
       )}
