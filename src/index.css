@@ -4,65 +4,59 @@
 
 @layer base {
   :root {
-    --background: 36 25% 96%;
-    --foreground: 25 30% 12%;
-
-    --card: 36 20% 93%;
-    --card-foreground: 25 30% 12%;
-
-    --popover: 36 20% 93%;
-    --popover-foreground: 25 30% 12%;
-
-    --primary: 38 65% 38%;
-    --primary-foreground: 36 25% 96%;
-
-    --secondary: 36 15% 85%;
-    --secondary-foreground: 25 30% 20%;
-
-    --muted: 36 15% 88%;
-    --muted-foreground: 25 15% 45%;
-
-    --accent: 38 55% 42%;
-    --accent-foreground: 36 25% 96%;
-
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142 40% 42%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 142 40% 42%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 72% 51%;
-    --destructive-foreground: 36 25% 96%;
-
-    --border: 36 20% 78%;
-    --input: 36 20% 78%;
-    --ring: 38 65% 38%;
-
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 142 40% 42%;
     --radius: 0.25rem;
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 90%;
+    --sidebar-primary: 142 40% 42%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 142 40% 42%;
 
-    --sidebar-background: 36 20% 93%;
-    --sidebar-foreground: 25 30% 12%;
-    --sidebar-primary: 38 65% 38%;
-    --sidebar-primary-foreground: 36 25% 96%;
-    --sidebar-accent: 36 15% 85%;
-    --sidebar-accent-foreground: 25 30% 12%;
-    --sidebar-border: 36 20% 78%;
-    --sidebar-ring: 38 65% 38%;
-
-    /* Museum custom vars */
-    --gold: #c49a2a;
-    --gold-light: #d4af5a;
-    --gold-pale: #edd89a;
-    --parchment: #f5efe0;
-    --parchment-dark: #e8dfc8;
-    --ink: #1c1409;
-    --ink-light: #3d2e14;
-    --sepia: #8b6914;
-    --divider-color: rgba(196, 154, 42, 0.35);
+    --bg-dark: #141414;
+    --bg-darker: #0e0e0e;
+    --bg-card: #1e1e1e;
+    --bg-section: #181818;
+    --green: #4a8c5c;
+    --green-light: #5fa870;
+    --green-dim: rgba(74, 140, 92, 0.12);
+    --text-primary: #f0f0f0;
+    --text-secondary: #aaaaaa;
+    --text-muted: #666;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-green: rgba(74, 140, 92, 0.4);
   }
 
   * {
-    @apply border-border;
     box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--parchment);
-    color: var(--ink);
+    background: var(--bg-dark);
+    color: var(--text-primary);
     font-family: "Golos Text", sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -71,165 +65,81 @@
   h2,
   h3,
   h4 {
-    font-family: "Cormorant Garamond", serif;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-darker);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--green);
   }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: "Cormorant Garamond", serif;
-  }
-
-  .font-body {
-    font-family: "Golos Text", sans-serif;
-  }
-
-  .text-gold {
-    color: var(--gold);
-  }
-
-  .text-ink {
-    color: var(--ink);
-  }
-
-  .bg-parchment {
-    background-color: var(--parchment);
-  }
-
-  .bg-parchment-dark {
-    background-color: var(--parchment-dark);
-  }
-
-  .border-gold {
-    border-color: var(--gold);
-  }
-
-  .border-divider {
-    border-color: var(--divider-color);
-  }
-
-  .ornament-line {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .ornament-line::before,
-  .ornament-line::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--divider-color);
-  }
-
-  .section-label {
-    font-family: "Golos Text", sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
+  .section-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--green-light);
+    font-family: "Golos Text", sans-serif;
   }
 
-  .museum-card {
-    background: var(--parchment-dark);
-    border: 1px solid var(--divider-color);
-    position: relative;
+  .green-btn {
+    background: var(--green);
+    color: #fff;
+    font-family: "Golos Text", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.3rem;
+    border: 1px solid var(--green);
+    transition: background 0.2s;
+  }
+  .green-btn:hover {
+    background: var(--green-light);
   }
 
-  .museum-card::before {
-    content: "";
-    position: absolute;
-    inset: 4px;
-    border: 1px solid var(--divider-color);
-    pointer-events: none;
-    z-index: 1;
+  .ghost-green {
+    background: transparent;
+    color: var(--green-light);
+    border: 1px solid var(--border-green);
+    font-family: "Golos Text", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.3rem;
+    transition: background 0.2s;
+  }
+  .ghost-green:hover {
+    background: var(--green-dim);
   }
 
-  .grain-overlay {
-    position: relative;
-  }
-
-  .grain-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  .page-enter {
-    animation: pageEnter 0.5s ease forwards;
-  }
-
-  @keyframes pageEnter {
+  @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(18px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
-  .stagger-1 {
-    animation-delay: 0.05s;
+  .fade-in {
+    animation: fadeUp 0.55s ease both;
   }
-  .stagger-2 {
-    animation-delay: 0.15s;
+  .delay-1 {
+    animation-delay: 0.1s;
   }
-  .stagger-3 {
-    animation-delay: 0.25s;
+  .delay-2 {
+    animation-delay: 0.2s;
   }
-  .stagger-4 {
-    animation-delay: 0.35s;
-  }
-
-  .gold-btn {
-    background: var(--gold);
-    color: var(--parchment);
-    font-family: "Golos Text", sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.75rem;
-    border: 1px solid var(--gold);
-    transition: all 0.2s ease;
-  }
-
-  .gold-btn:hover {
-    background: transparent;
-    color: var(--gold);
-  }
-
-  .ghost-btn {
-    background: transparent;
-    color: var(--gold);
-    font-family: "Golos Text", sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.65rem 1.75rem;
-    border: 1px solid var(--gold);
-    transition: all 0.2s ease;
-  }
-
-  .ghost-btn:hover {
-    background: var(--gold);
-    color: var(--parchment);
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--parchment-dark);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 0;
+  .delay-3 {
+    animation-delay: 0.3s;
   }
 }
